@@ -1,33 +1,27 @@
 import React from "react";
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 type propTypes = {
-  title: string;
+  title?: string;
   color?: string;
   bgColor?: string;
   handleClick?: any;
-  flexSize?: number;
+  icon?: any;
 };
 
-const Button = ({
-  title,
-  color,
-  bgColor,
-  handleClick,
-  flexSize,
-}: propTypes) => {
+const Button = ({ title, color, bgColor, handleClick, icon }: propTypes) => {
   return (
-    <View style={[styles.container, { flex: flexSize }]}>
+    <View style={styles.container}>
       <TouchableHighlight style={{ borderRadius: 50 }} onPress={handleClick}>
         <View
           style={[
             styles.button,
             { backgroundColor: bgColor ? bgColor : "#DDDDDD" },
-            { width: flexSize ? 170 : 80 },
           ]}
         >
           <Text style={[styles.text, { color: color ? color : "#000" }]}>
-            {title}
+            {icon ? <Ionicons name={icon} size={32} color="red" /> : title}
           </Text>
         </View>
       </TouchableHighlight>
@@ -37,13 +31,14 @@ const Button = ({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     margin: 5,
   },
   button: {
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 50,
+    width: 80,
     height: 80,
   },
   text: {

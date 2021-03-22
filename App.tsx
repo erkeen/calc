@@ -86,6 +86,15 @@ export default function App() {
     setIsRes(false);
   };
 
+  const handleBackSpace = () => {
+    if (input.charAt(input.length - 1) !== "0") {
+      setInput(input.slice(0, input.length - 1));
+    }
+    if (input.length <= 1 || (input.length <= 2 && input.charAt(0) === "-")) {
+      setInput("0");
+    }
+  };
+
   if (!fontsLoaded) return <AppLoading />;
 
   return (
@@ -96,7 +105,7 @@ export default function App() {
       <View>
         <View style={styles.digitsRow}>
           <Button title="C" color="red" handleClick={handleClear} />
-          <Button title="-/+" handleClick={handleNegative} />
+          <Button icon="backspace-outline" handleClick={handleBackSpace} />
           <Button
             title="%"
             color="green"
@@ -139,7 +148,8 @@ export default function App() {
           />
         </View>
         <View style={styles.digitsRow}>
-          <Button title="0" flexSize={2} handleClick={() => handleClick("0")} />
+          <Button title="-/+" handleClick={handleNegative} />
+          <Button title="0" handleClick={() => handleClick("0")} />
           <Button title="." handleClick={handleDecimal} />
           <Button
             title="="
